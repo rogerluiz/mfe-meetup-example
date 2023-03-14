@@ -23,3 +23,8 @@ Example of microfront-end
         - event buzz (Verificar se utilizaremos bibliotecas externas ou na mão)
             - [https://rxjs.dev/](https://rxjs.dev/)
         - passar dados via context api
+
+
+### Links/utils
+https://sivadass.github.io/react-shopping-cart/
+https://dummyjson.com/docs/products
