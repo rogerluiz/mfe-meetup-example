@@ -1,0 +1,10 @@
+{
+  "name": "mfe-meetup-example",
+  "version": "1.0.0",
+  "description": "microfront-end example",
+  "main": "index.js",
+  "repository": "git@github.com:rogerluiz/mfe-meetup-example.git",
+  "author": "Roger Luiz <rmiranda@vr.com.br>",
+  "license": "MIT",
+  "private": true
+}
