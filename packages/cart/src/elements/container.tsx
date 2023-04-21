@@ -21,16 +21,16 @@ const StyledContainer = styled('div', {
     fluid: {
       false: {
         '@sm': {
-          maxWidth: '540px',
+          maxWidth: 540,
         },
         '@md': {
-          maxWidth: '768px',
+          maxWidth: 768,
         },
         '@lg': {
-          maxWidth: '1024px',
+          maxWidth: 1024,
         },
         '@xl': {
-          maxWidth: '1280px',
+          maxWidth: 1280,
         },
       },
     },

@@ -4,7 +4,7 @@ const deps = require('./package.json').dependencies;
 module.exports = {
   name: 'footer',
   exposes: {
-    './Footer': './src/app',
+    './Footer': './src/components/footer',
   },
   filename: 'remoteEntry.js',
   shared: {

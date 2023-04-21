@@ -1,65 +1,98 @@
-// import { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Button } from '../elements/button';
-// import { Icon } from '../elements/icon';
 import { Text } from '../elements/text';
 import { styled } from '../stitches.config';
-
-const Container = styled('div', {
-  width: '100%',
-  maxWidth: 400,
-  height: 400,
-  backgroundColor: '$white',
-  borderRadius: 8,
-  borderWidth: 1,
-  borderStyle: 'solid',
-  borderColor: '$grayDark',
-  boxShadow: '0px 1px 4px #00000029;',
-  display: 'flex',
-  padding: 20,
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-});
-
-export type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
+import { Product } from '../store';
 
 export interface CardProps {
   data: Product | null;
+  onAddCart?: (id: number) => void;
 }
 
-function Card({ data }: CardProps) {
+const convertPrice = (price: number) => {
+  return price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+};
+
+function Card({ data, onAddCart }: CardProps) {
+  const handleAddCart = useCallback(
+    (id: number) => {
+      onAddCart?.(id);
+    },
+    [onAddCart],
+  );
+
   if (data === null) {
-    <Container>empty</Container>;
+    return <CardContainer>empty</CardContainer>;
   }
 
-  const { id, thumbnail, title, price } = data as Product;
+  const { id, thumbnail, title, price, description } = data;
 
   return (
-    <Container id={id.toString()}>
-      <div>
-        <img src={thumbnail} alt={title} />
-      </div>
-      <div>
-        <Text>{title}</Text>
-        <Text>{price}</Text>
-      </div>
-      <div>
-        <Button>ADD TO CART</Button>
-      </div>
-    </Container>
+    <CardContainer id={id.toString()}>
+      <CardFigure>
+        <CardImage src={thumbnail} alt={title} />
+      </CardFigure>
+      <CardContent>
+        <Text size={14} variant="bold" css={{ marginBottom: 16 }}>
+          {title}
+        </Text>
+        <Text size={13} color="dark">
+          {description}
+        </Text>
+      </CardContent>
+      <CardButtonGroup>
+        <Text variant="semibold" size={14}>
+          {convertPrice(price * 5.17)}
+        </Text>
+        <Button onClick={() => handleAddCart(id)}>Comprar</Button>
+      </CardButtonGroup>
+    </CardContainer>
   );
 }
 
+export type { Product } from '../store';
 export default Card;
+
+const CardContainer = styled('div', {
+  width: '100%',
+  maxWidth: 500,
+  backgroundColor: '$white',
+  borderRadius: 8,
+  overflow: 'hidden',
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: '$primaryLight',
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+const CardFigure = styled('figure', {
+  width: '100%',
+  height: 300,
+  overflow: 'hidden',
+});
+const CardImage = styled('img', {
+  width: '100%',
+  height: 300,
+  objectFit: 'cover',
+  borderBottom: '1px solid $primaryLight',
+});
+
+const CardContent = styled('div', {
+  padding: 20,
+  height: 120,
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+const CardButtonGroup = styled('div', {
+  padding: 20,
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderTop: '1px solid $primaryLight',
+});

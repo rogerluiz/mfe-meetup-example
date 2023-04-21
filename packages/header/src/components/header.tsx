@@ -4,6 +4,50 @@ import { Container } from '../elements/container';
 import { Icon } from '../elements/icon';
 import { Text } from '../elements/text';
 
+import CardList from 'cart/CardList';
+
+function Header() {
+  return (
+    <BaseContainer id="header">
+      <Container>
+        <Content>
+          <Logo>
+            <Icon icon={['fas', 'whale']} size="2x" color="light" />
+          </Logo>
+
+          <Cart>
+            <CartInfo>
+              <Text color="white" size={12}>
+                Items: 0
+              </Text>
+              <Text color="white" size={12}>
+                Total: R$ 0,00
+              </Text>
+            </CartInfo>
+            <CartButton>
+              <Icon icon={['fal', 'shopping-cart']} size="2x" color="light" />
+            </CartButton>
+
+            <Popover>
+              <CardList />
+            </Popover>
+          </Cart>
+        </Content>
+      </Container>
+    </BaseContainer>
+  );
+}
+
+export default Header;
+
+const Popover = styled('div', {
+  display: 'flex',
+  position: 'absolute',
+  top: '90px',
+  width: '300px',
+  right: '20px',
+});
+
 const BaseContainer = styled('header', {
   width: '100%',
   height: 80,
@@ -33,33 +77,3 @@ const CartButton = styled('button', {
   background: 'transparent',
   border: 'none',
 });
-
-function Header() {
-  return (
-    <BaseContainer id="header">
-      <Container>
-        <Content>
-          <Logo>
-            <Icon icon={['fas', 'whale']} size="2x" color="light" />
-          </Logo>
-
-          <Cart>
-            <CartInfo>
-              <Text color="white" size={12}>
-                Items: 0
-              </Text>
-              <Text color="white" size={12}>
-                Total: R$ 0,00
-              </Text>
-            </CartInfo>
-            <CartButton>
-              <Icon icon={['fal', 'shopping-cart']} size="2x" color="light" />
-            </CartButton>
-          </Cart>
-        </Content>
-      </Container>
-    </BaseContainer>
-  );
-}
-
-export default Header;

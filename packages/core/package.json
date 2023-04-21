@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "PORT=4000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "PORT=4000 craco start",
+    "build": "craco build",
+    "test": "craco test"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",

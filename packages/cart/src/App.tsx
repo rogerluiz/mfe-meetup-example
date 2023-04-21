@@ -1,26 +1,30 @@
 import { useEffect, useState } from 'react';
 import Card, { Product } from './components/card';
+import CardGrid from './components/card-grid';
 import CardList from './components/card-list';
+
 import globalStyles from './global-style';
+import { useStore } from './store';
 
 function App() {
-  const [products, setProducts] = useState<Product[]>();
+  const { products, getProduct } = useStore();
 
   useEffect(() => {
     globalStyles();
   }, []);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=5')
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products));
-  }, []);
+    getProduct(5);
+  }, [getProduct]);
 
-  console.log(products);
+  if (products === null) return <div>Loading...</div>;
+
   return (
     <article>
-      <Card data={products ? products[0] : null} />
-      <CardList data={products} />
+      {/* <Card data={products ? products[0] : null} /> */}
+      <CardList data={undefined} />
+
+      {/* <CardGrid /> */}
     </article>
   );
 }

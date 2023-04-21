@@ -1,5 +1,13 @@
+import { useEffect } from 'react';
+import Footer from './components/footer';
+import globalStyles from './global-style';
+
 function App() {
-  return <article>cart</article>;
+  useEffect(() => {
+    globalStyles();
+  }, []);
+
+  return <Footer />;
 }
 
 export default App;

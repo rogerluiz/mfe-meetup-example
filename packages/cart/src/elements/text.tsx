@@ -1,3 +1,4 @@
+import { CSS } from '@stitches/react';
 import { ReactNode, ComponentPropsWithoutRef } from 'react';
 import { styled } from '../stitches.config';
 
@@ -50,6 +51,7 @@ interface TextProps extends ComponentPropsWithoutRef<'p'> {
    */
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
   as?: React.ElementType | keyof JSX.IntrinsicElements;
+  css?: CSS;
 }
 
 const Paragraph = styled('p', {

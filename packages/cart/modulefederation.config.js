@@ -4,7 +4,9 @@ const deps = require('./package.json').dependencies;
 module.exports = {
   name: 'cart',
   exposes: {
-    './Cart': './src/app',
+    './Card': './src/components/card',
+    './CardList': './src/components/card-list',
+    './CardGrid': './src/components/card-grid',
   },
   filename: 'remoteEntry.js',
   shared: {

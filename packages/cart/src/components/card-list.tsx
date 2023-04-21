@@ -4,23 +4,6 @@ import { Icon } from '../elements/icon';
 import { styled } from '../stitches.config';
 import { CardItem } from './card-item';
 
-const Container = styled('div', {
-  width: '100%',
-  maxWidth: 400,
-  height: 400,
-  backgroundColor: '$white',
-  borderRadius: 8,
-  borderWidth: 1,
-  borderStyle: 'solid',
-  borderColor: '$grayDark',
-  boxShadow: '0px 1px 4px #00000029;',
-  display: 'flex',
-  padding: 20,
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-});
-
 export interface CardListProps {
   data: any;
 }
@@ -28,14 +11,16 @@ export interface CardListProps {
 function CardList({ data }: CardListProps) {
   const renderEmpty = useCallback(() => {
     return (
-      <>
-        <Icon
-          icon={['far', 'dolly-flatbed-empty']}
-          size="8x"
-          color="primaryMedium"
-        />
+      <Container>
+        <IconContainer>
+          <Icon
+            icon={['far', 'dolly-flatbed-empty']}
+            size="5x"
+            color="primaryMedium"
+          />
+        </IconContainer>
         <Button>CHECKOUT</Button>
-      </>
+      </Container>
     );
   }, []);
 
@@ -61,3 +46,31 @@ function CardList({ data }: CardListProps) {
 }
 
 export default CardList;
+
+const Container = styled('div', {
+  width: '100%',
+  maxWidth: 400,
+  height: 400,
+  backgroundColor: '$white',
+  borderRadius: 8,
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: '$grayDark',
+  boxShadow: '0px 1px 4px #00000029;',
+  display: 'flex',
+  padding: 20,
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+});
+
+const IconContainer = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  size: 100,
+  borderRadius: '50%',
+  overflow: 'hidden',
+  backgroundColor: '$grayLight',
+  margin: 16,
+});

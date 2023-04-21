@@ -1,6 +1,3 @@
-// import { useCallback, useEffect } from 'react';
-// import { Button } from '../elements/button';
-// import { Icon } from '../elements/icon';
 import { styled } from '../stitches.config';
 
 const Content = styled('div', {

@@ -4,7 +4,10 @@ const deps = require('./package.json').dependencies;
 module.exports = {
   name: 'header',
   exposes: {
-    './Header': './src/app',
+    './Header': './src/components/header',
+  },
+  remotes: {
+    cart: 'cart@http://localhost:4003/remoteEntry.js',
   },
   filename: 'remoteEntry.js',
   shared: {

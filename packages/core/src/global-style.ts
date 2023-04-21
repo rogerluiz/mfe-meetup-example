@@ -36,7 +36,7 @@ const globalStyles = globalCss({
     '> header': {
       gridArea: 'header',
     },
-    '> main': {
+    '> section': {
       gridArea: 'main',
       marginBottom: '$6',
     },
