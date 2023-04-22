@@ -9,8 +9,9 @@ export interface CardProps {
   onAddCart?: (id: number) => void;
 }
 
-const convertPrice = (price: number) => {
-  return price.toLocaleString('pt-BR', {
+export const convertPrice = (price: number) => {
+  const returnPrice = price * 5.17;
+  return returnPrice.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
@@ -45,7 +46,7 @@ function Card({ data, onAddCart }: CardProps) {
       </CardContent>
       <CardButtonGroup>
         <Text variant="semibold" size={14}>
-          {convertPrice(price * 5.17)}
+          {convertPrice(price)}
         </Text>
         <Button onClick={() => handleAddCart(id)}>Comprar</Button>
       </CardButtonGroup>

@@ -120,6 +120,7 @@ export function Text({
   uppercase,
   textAlign = 'auto',
   children,
+  css,
   ...rest
 }: TextProps) {
   return (
@@ -130,6 +131,7 @@ export function Text({
         color: `$${color}`,
         fontSize: size,
         lineHeigh: lineHeight,
+        ...css,
       }}
       variant={variant}
       italic={italic}

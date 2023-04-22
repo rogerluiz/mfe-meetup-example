@@ -1,3 +1,6 @@
+import { useCallback, useState, useRef } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
+
 import { styled } from '../stitches.config';
 
 import { Container } from '../elements/container';
@@ -7,9 +10,22 @@ import { Text } from '../elements/text';
 import CardList from 'cart/CardList';
 
 function Header() {
+  const popoverRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const handlePopoverToggle = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  const handleClickOutside = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  useOnClickOutside(popoverRef, handleClickOutside);
+
   return (
     <BaseContainer id="header">
-      <Container>
+      <Container css={{ position: 'relative' }}>
         <Content>
           <Logo>
             <Icon icon={['fas', 'whale']} size="2x" color="light" />
@@ -24,12 +40,12 @@ function Header() {
                 Total: R$ 0,00
               </Text>
             </CartInfo>
-            <CartButton>
+            <CartButton onClick={handlePopoverToggle}>
               <Icon icon={['fal', 'shopping-cart']} size="2x" color="light" />
             </CartButton>
 
-            <Popover>
-              <CardList />
+            <Popover ref={popoverRef} open={open}>
+              <CardList data={null} onClose={handlePopoverToggle} />
             </Popover>
           </Cart>
         </Content>
@@ -41,11 +57,21 @@ function Header() {
 export default Header;
 
 const Popover = styled('div', {
-  display: 'flex',
   position: 'absolute',
-  top: '90px',
-  width: '300px',
-  right: '20px',
+  top: 80,
+  width: 350,
+  right: 20,
+
+  variants: {
+    open: {
+      true: {
+        display: 'flex',
+      },
+      false: {
+        display: 'none',
+      },
+    },
+  },
 });
 
 const BaseContainer = styled('header', {
@@ -54,6 +80,7 @@ const BaseContainer = styled('header', {
   display: 'flex',
   alignItems: 'center',
   backgroundColor: '$primary',
+  position: 'relative',
 });
 
 const Content = styled('div', {

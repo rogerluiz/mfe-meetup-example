@@ -21,6 +21,55 @@ export type ProductResponse = {
   total: number;
 };
 
+export type CartAddProducts = {
+  id: number;
+  quantity: number;
+};
+
+export type CartList = {
+  id: number;
+  products: Product[];
+  total: number;
+  totalProducts: number;
+};
+
+interface State {
+  products: Product[] | null;
+  getProduct: (limit: number) => void;
+  cartList: CartList | null;
+  addCart: (product: Product) => void;
+}
+
+export const useStore = create<State>()((set) => ({
+  products: null,
+  getProduct: async (limit: number) => {
+    const res = await fetch(
+      `https://dummyjson.com/products/category/mens-shoes?limit=${limit}`,
+    );
+
+    const data: ProductResponse = await res.json();
+
+    set((state) => ({ ...state, products: data.products }));
+  },
+
+  cartList: null,
+  addCart: async (product: Product) => {
+    set((state) => ({
+      ...state,
+      cartList: {
+        id: 1,
+        products: state.cartList
+          ? [...state.cartList.products, product]
+          : [product],
+        total: state.cartList
+          ? state.cartList.total + product.price
+          : product.price,
+        totalProducts: state.cartList ? state.cartList.products.length + 1 : 1,
+      },
+    }));
+  },
+}));
+
 export type CartsProducts = {
   id: number;
   title: string;
@@ -48,55 +97,21 @@ export type CartResponse = {
   total: number;
 };
 
-export type CartAddProducts = {
-  id: number;
-  quantity: number;
-};
-
-interface State {
-  products: Product[] | null;
-  getProduct: (limit: number) => void;
-  cartList: Carts[] | null;
-  getCart: (idUser: number) => void;
-  addCart: (idUser: number, products: CartAddProducts[]) => void;
+interface CartState {
+  cartList: Carts | null;
+  getCart: (id: number) => void;
+  addCart: (product: CartAddProducts[]) => void;
 }
 
-export const useStore = create<State>()((set) => ({
-  products: null,
-  getProduct: async (limit: number) => {
-    const res = await fetch(
-      `https://dummyjson.com/products/category/mens-shoes?limit=${limit}`,
-    );
-
-    const data: ProductResponse = await res.json();
-
-    set((state) => ({ ...state, products: data.products }));
-  },
+export const useCartStore = create<CartState>()((set) => ({
   cartList: null,
-  getCart: async (idUser: number) => {
-    const res = await fetch(`https://dummyjson.com/carts/user/${idUser}`);
+  getCart: async (id: number) => {
+    const res = await fetch(`https://dummyjson.com/carts/${id}`);
 
-    const data: CartResponse = await res.json();
-
-    set((state) => ({ ...state, cartList: data.carts }));
+    const data: Carts = await res.json();
+    console.log(data);
+    set((state) => ({ ...state, cartList: data }));
   },
-  addCart: async (idUser: number, products: CartAddProducts[]) => {
-    const res = await fetch('https://dummyjson.com/carts/add/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: idUser,
-        products,
-      }),
-    });
 
-    const data: CartResponse = await res.json();
-
-    set((state) => ({
-      ...state,
-      cartList: [...(state.cartList as any), data.carts],
-    }));
-  },
+  addCart: async () => {},
 }));

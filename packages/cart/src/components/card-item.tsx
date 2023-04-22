@@ -1,25 +1,10 @@
 import { styled } from '../stitches.config';
-
-const Content = styled('div', {
-  display: 'flex',
-  width: '100%',
-});
-
-const ImageContainer = styled('div', {
-  width: '20%',
-  img: {
-    width: '100%',
-  },
-});
-
-const TitleContainer = styled('div', {});
-
-const PriceContainer = styled('div', {});
+import { convertPrice } from './card';
 
 export interface CardItemProsp {
   id: number;
   title: string;
-  price: string;
+  price: number;
   thumbnail: string;
 }
 
@@ -30,7 +15,38 @@ export function CardItem({ id, title, price, thumbnail }: CardItemProsp) {
         <img src={thumbnail} alt={title} />
       </ImageContainer>
       <TitleContainer>{title}</TitleContainer>
-      <PriceContainer>{price}</PriceContainer>
+      <PriceContainer>{convertPrice(price)}</PriceContainer>
     </Content>
   );
 }
+
+const Content = styled('div', {
+  width: '100%',
+  height: 60,
+  padding: 4,
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: '$grayLight',
+  gap: 8,
+});
+
+const ImageContainer = styled('div', {
+  width: 50,
+  height: 50,
+  overflow: 'hidden',
+  img: {
+    width: '100%',
+  },
+});
+
+const TitleContainer = styled('div', {
+  flex: 1,
+});
+
+const PriceContainer = styled('div', {
+  // flex: 1,
+  minWidth: 70,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
