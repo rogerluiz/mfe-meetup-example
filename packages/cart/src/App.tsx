@@ -20,14 +20,14 @@ function App() {
   }, [getProduct]);
 
   const onAddCart = useCallback(
-    (id: number) => {
+    (product: Product) => {
       if (products === null) {
         return;
       }
 
-      const filtered = products.filter((item) => item.id === id)[0];
+      // const filtered = products.filter((item) => item.id === id)[0];
 
-      setData(filtered);
+      setData(product);
     },
     [products],
   );

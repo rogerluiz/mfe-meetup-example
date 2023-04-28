@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import { styled } from '../stitches.config';
@@ -12,6 +12,16 @@ import CardList from 'cart/CardList';
 function Header() {
   const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const [products, setProducts] = useState<any>(null);
+
+  useEffect(() => {
+    document.addEventListener('add-cart', (d: any) => {
+      console.log(d.detail);
+
+      setProducts(d.detail);
+    });
+  }, []);
 
   const handlePopoverToggle = useCallback(() => {
     setOpen((prev) => !prev);
@@ -45,7 +55,7 @@ function Header() {
             </CartButton>
 
             <Popover ref={popoverRef} open={open}>
-              <CardList data={null} onClose={handlePopoverToggle} />
+              <CardList data={products} onClose={handlePopoverToggle} />
             </Popover>
           </Cart>
         </Content>

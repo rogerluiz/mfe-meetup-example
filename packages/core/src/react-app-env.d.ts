@@ -19,3 +19,11 @@ declare module 'cart/CardGrid' {
 
   export default CardApp;
 }
+
+declare module 'cart/useStore' {
+  import useStore from 'cart/useStore';
+
+  // const useStore: UseBoundStore<StoreApi<State>>
+
+  export default useStore;
+}

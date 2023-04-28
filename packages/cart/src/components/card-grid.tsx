@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { styled } from '../stitches.config';
-import { useStore } from '../store';
+import { Product, useStore } from '../store';
 import Card from './card';
 import { Container } from '../elements/container';
 
 export interface CardGridProps {
-  onAddCart?: (id: number) => void;
+  onAddCart?: (product: Product) => void;
 }
 
 function CardGrid({ onAddCart }: CardGridProps) {
@@ -16,8 +16,8 @@ function CardGrid({ onAddCart }: CardGridProps) {
   }, [getProduct]);
 
   const handleAddCart = useCallback(
-    (id: number) => {
-      onAddCart?.(id);
+    (product: Product) => {
+      onAddCart?.(product);
     },
     [onAddCart],
   );

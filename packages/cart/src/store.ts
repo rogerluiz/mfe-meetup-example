@@ -115,3 +115,5 @@ export const useCartStore = create<CartState>()((set) => ({
 
   addCart: async () => {},
 }));
+
+export default useStore;

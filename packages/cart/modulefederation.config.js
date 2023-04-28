@@ -7,6 +7,7 @@ module.exports = {
     './Card': './src/components/card',
     './CardList': './src/components/card-list',
     './CardGrid': './src/components/card-grid',
+    './useStore': './src/store',
   },
   filename: 'remoteEntry.js',
   shared: {

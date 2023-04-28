@@ -1,19 +1,23 @@
 import React, { lazy, useEffect } from 'react';
 
+import useStore from 'cart/useStore';
+
 import { styled } from './stitches.config';
 import globalStyles from './global-style';
 import { Container } from './elements/container';
-
-// import CardGrid from 'cart/CardGrid';
 
 const Header = lazy(() => import('header/Header'));
 const Footer = lazy(() => import('footer/Footer'));
 const CardGrid = lazy(() => import('cart/CardGrid'));
 
 export function App() {
+  const { addCart } = useStore();
+
   useEffect(() => {
     globalStyles();
   }, []);
+
+  console.log(addCart);
 
   return (
     <>
@@ -24,7 +28,14 @@ export function App() {
       <Main>
         <Container>
           <React.Suspense fallback="Loading Grid">
-            <CardGrid onAddCart={(id: number) => console.log(id)} />
+            <CardGrid
+              onAddCart={(data: any) => {
+                document.dispatchEvent(
+                  new CustomEvent('add-cart', { detail: data }),
+                );
+                // addCart(data);
+              }}
+            />
           </React.Suspense>
         </Container>
       </Main>

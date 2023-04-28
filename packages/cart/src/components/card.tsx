@@ -6,7 +6,7 @@ import { Product } from '../store';
 
 export interface CardProps {
   data: Product | null;
-  onAddCart?: (id: number) => void;
+  onAddCart?: (product: Product) => void;
 }
 
 export const convertPrice = (price: number) => {
@@ -19,8 +19,8 @@ export const convertPrice = (price: number) => {
 
 function Card({ data, onAddCart }: CardProps) {
   const handleAddCart = useCallback(
-    (id: number) => {
-      onAddCart?.(id);
+    (product: Product) => {
+      onAddCart?.(product);
     },
     [onAddCart],
   );
@@ -48,7 +48,7 @@ function Card({ data, onAddCart }: CardProps) {
         <Text variant="semibold" size={14}>
           {convertPrice(price)}
         </Text>
-        <Button onClick={() => handleAddCart(id)}>Comprar</Button>
+        <Button onClick={() => handleAddCart(data)}>Comprar</Button>
       </CardButtonGroup>
     </CardContainer>
   );

@@ -6,7 +6,7 @@ import { styled } from '../stitches.config';
 
 import { CardItem } from './card-item';
 
-import { useStore, CartList, Product } from '../store';
+import { useStore, Product } from '../store';
 import { convertPrice } from './card';
 
 export interface CardListProps {
