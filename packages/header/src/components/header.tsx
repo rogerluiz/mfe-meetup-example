@@ -17,8 +17,6 @@ function Header() {
 
   useEffect(() => {
     document.addEventListener('add-cart', (d: any) => {
-      console.log(d.detail);
-
       setProducts(d.detail);
     });
   }, []);

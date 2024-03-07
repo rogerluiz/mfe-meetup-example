@@ -5,7 +5,7 @@ function Footer() {
   return (
     <Container>
       <Text size={12} color="primary">
-        2023 ©
+        2023 © MFe Footer
       </Text>
     </Container>
   );

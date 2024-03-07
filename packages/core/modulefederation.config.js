@@ -6,8 +6,8 @@ module.exports = {
   name: 'core',
   remotes: {
     footer: 'footer@http://localhost:4002/remoteEntry.js',
-    header: 'header@http://localhost:4001/remoteEntry.js',
-    cart: 'cart@http://localhost:4003/remoteEntry.js',
+    header: 'header@http://localhost:4003/remoteEntry.js',
+    cart: 'cart@http://localhost:4004/remoteEntry.js',
   },
   shared: {
     ...deps,
@@ -18,10 +18,6 @@ module.exports = {
     'react-dom': {
       singleton: true,
       requiredVersion: deps['react-dom'],
-    },
-    'styled-components': {
-      singleton: true,
-      requiredVersion: deps['styled-components'],
     },
   },
 };

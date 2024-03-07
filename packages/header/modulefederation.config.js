@@ -7,7 +7,7 @@ module.exports = {
     './Header': './src/components/header',
   },
   remotes: {
-    cart: 'cart@http://localhost:4003/remoteEntry.js',
+    cart: 'cart@http://localhost:4004/remoteEntry.js',
   },
   filename: 'remoteEntry.js',
   shared: {
